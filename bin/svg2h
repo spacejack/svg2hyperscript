@@ -1,0 +1,44 @@
+#! /usr/bin/env node
+const fs = require('fs')
+const program = require('commander')
+const svg2hyperscript = require('../index')
+
+program
+	.version('0.1.0')
+	.arguments('<svgfile>')
+	.option('-o, --output [filename]', 'Output js file')
+	.option('-fn, --function [string]', 'Hyperscript function')
+	.parse(process.argv)
+
+if (process.stdin.isTTY) {
+	// Use filename arg
+	if (program.args.length < 1) {
+		console.log('Input file required')
+		process.exit()
+	}
+	const str = fs.readFileSync(program.args[0], {encoding: 'utf-8'}).toString()
+	const result = svg2hyperscript(str, program.function)
+	if (program.output) {
+		fs.writeFileSync(program.output, result, {encoding: 'utf-8'})
+	} else {
+		console.log(result)
+	}
+} else {
+	// Use stdin
+	let data = ''
+	process.stdin.setEncoding('utf-8')
+	process.stdin.on('readable', () => {
+		let chunk
+		while (chunk = process.stdin.read()) {
+			data += chunk
+		}
+	})
+	process.stdin.on('end', () => {
+		const result = svg2hyperscript(data, program.function)
+		if (program.output) {
+			fs.writeFileSync(program.output, result, {encoding: 'utf-8'})
+		} else {
+			process.stdout.write(result)
+		}
+	})
+}

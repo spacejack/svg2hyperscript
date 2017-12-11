@@ -1,0 +1,29 @@
+{
+  "name": "svg2hyperscript",
+  "version": "0.1.0",
+  "description": "SVG to Hyperscript converter",
+  "main": "index.js",
+  "bin": {
+    "svg2h": "bin/svg2h"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/spacejack/svg2hyperscript.git"
+  },
+  "keywords": [
+    "svg",
+    "hyperscript",
+    "converter"
+  ],
+  "author": "spacejack",
+  "license": "ISC",
+  "dependencies": {
+    "commander": "^2.12.2",
+    "eslint": "^4.13.0",
+    "js-beautify": "^1.7.5",
+    "libxmljs": "^0.18.7"
+  }
+}
