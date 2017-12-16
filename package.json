@@ -1,6 +1,6 @@
 {
   "name": "svg2hyperscript",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "SVG to Hyperscript converter",
   "main": "index.js",
   "bin": {
@@ -22,7 +22,7 @@
   "license": "ISC",
   "dependencies": {
     "commander": "^2.12.2",
-    "eslint": "^4.13.0",
+    "eslint": "^4.13.1",
     "js-beautify": "^1.7.5",
     "libxmljs": "^0.18.7"
   }

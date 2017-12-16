@@ -4,18 +4,14 @@ const program = require('commander')
 const svg2hyperscript = require('../index')
 
 program
-	.version('0.1.0')
+	.version('0.2.0')
 	.arguments('<svgfile>')
 	.option('-o, --output [filename]', 'Output js file')
 	.option('-fn, --function [string]', 'Hyperscript function')
 	.parse(process.argv)
 
-if (process.stdin.isTTY) {
+if (program.args.length > 0) {
 	// Use filename arg
-	if (program.args.length < 1) {
-		console.log('Input file required')
-		process.exit()
-	}
 	const str = fs.readFileSync(program.args[0], {encoding: 'utf-8'}).toString()
 	const result = svg2hyperscript(str, program.function)
 	if (program.output) {
@@ -25,6 +21,10 @@ if (process.stdin.isTTY) {
 	}
 } else {
 	// Use stdin
+	if (process.stdin.isTTY) {
+		console.log('Input file required')
+		process.exit()
+	}
 	let data = ''
 	process.stdin.setEncoding('utf-8')
 	process.stdin.on('readable', () => {
